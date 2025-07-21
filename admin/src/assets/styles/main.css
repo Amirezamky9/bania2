@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* You can add global custom styles here if needed */
+body {
+  /* This ensures that the background color transition is smooth */
+  @apply transition-colors duration-300;
+}
