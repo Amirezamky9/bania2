@@ -16,14 +16,14 @@
         </transition>
       </router-view>
     </main>
-    
+
     <!-- Footer Component -->
     <AppFooter />
 
     <!-- Login/Signup Modal -->
     <AppModal v-model="showLoginModal">
       <template #title>{{ isLoginView ? 'ورود به حساب کاربری' : 'ایجاد حساب کاربری' }}</template>
-      
+
       <!-- Login Form -->
       <form v-if="isLoginView" @submit.prevent="handleLogin">
         <div class="mb-4">
@@ -108,7 +108,7 @@ function openLoginModal(onSuccessCallback = null) {
 }
 
 function handleLoginRequest(onSuccessCallback) {
-    openLoginModal(onSuccessCallback);
+    openLoginModal(onSuccessCallback); 
 }
 
 async function handleLogin() {
@@ -128,11 +128,19 @@ async function handleLogin() {
 }
 
 async function handleSignup() {
+  // --- DIAGNOSTIC TEST ---
+  console.log('1. Signup button clicked!'); // <-- پیام تستی ۱
+  console.log('2. Signup data:', { name: signupForm.name, email: signupForm.email, password: signupForm.password }); // <-- پیام تستی ۲
+
   try {
+    console.log('3. Calling userStore.handleSignup...'); // <-- پیام تستی ۳
     await userStore.handleSignup(signupForm.name, signupForm.email, signupForm.password);
+
+    console.log('4. Signup successful in App.vue!'); // <-- پیام تستی ۴
     triggerToast('ثبت نام با موفقیت انجام شد! اکنون می‌توانید وارد شوید.', 'success');
     isLoginView.value = true; // Switch to login view after successful signup
   } catch (error) {
+    console.error('5. Signup failed in App.vue with error:', error); // <-- پیام تستی ۵
     triggerToast(error.message || 'خطا در ثبت نام', 'error');
   }
 }
