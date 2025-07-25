@@ -41,7 +41,7 @@
       </form>
 
       <!-- Signup Form -->
-      <form v-else @submit.prevent="handleSignup">
+      <form v-else @submit.prevent="() => { console.log('Form submission event fired!'); handleSignup(); }">
         <div class="mb-4">
           <label for="signup-name" class="block mb-2 text-sm font-medium text-gray-600">نام و نام خانوادگی</label>
           <input v-model="signupForm.name" type="text" id="signup-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400" placeholder="نام شما" required>
