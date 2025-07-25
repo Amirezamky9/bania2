@@ -9,20 +9,11 @@ import allRoutes from './src/routes/index.js';
 import { errorHandler } from './src/middlewares/error.middleware.js';
 
 // Load environment variables from .env file
-//dotenv.config();
-// Load environment variables from .env file
 dotenv.config();
-
-// --- DIAGNOSTIC TEST ---
-console.log('--- DIAGNOSTIC TEST ---');
-console.log('MONGO_URI is:', process.env.MONGO_URI);
-console.log('-----------------------');
+// Load environment variables from .env file
 
 // Initialize Express app
 const app = express();
-
-// Initialize Express app
-//const app = express();
 
 // --- Security Middlewares ---
 
@@ -62,8 +53,9 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 
+
 // --- Database Connection ---
-connectDB();
+connectDB(process.env.MONGO_URI); // <-- پاس دادن مستقیم URI
 
 
 // --- API Routes ---
